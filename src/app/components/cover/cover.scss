@@ -1,0 +1,72 @@
+.cover-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: opacity 0.8s ease;
+  
+  &.fade-out {
+    opacity: 0;
+  }
+}
+
+.cover-content {
+  text-align: center;
+  z-index: 10;
+  animation: fadeIn 1.5s ease;
+}
+
+.title-wrapper {
+  margin-bottom: 50px;
+}
+
+.main-title {
+  font-family: 'Dancing Script', 'Brush Script MT', cursive;
+  font-size: 5rem;
+  background: linear-gradient(135deg, var(--purple-light), var(--gold), var(--purple-glow));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+  animation: glow-pulse 3s infinite, float 3s ease-in-out infinite;
+  
+  @media (max-width: 768px) {
+    font-size: 3rem;
+  }
+}
+
+.subtitle {
+  font-family: 'Dancing Script', 'Brush Script MT', cursive;
+  font-size: 3rem;
+  color: var(--lavender);
+  text-shadow: 0 0 20px var(--purple-glow);
+  animation: float 2s ease-in-out infinite;
+  animation-delay: 0.5s;
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+}
+
+.sparkle-decoration {
+  font-size: 4rem;
+  margin: 30px 0;
+  animation: sparkle 2s infinite;
+}
+
+.open-letter-btn {
+  margin-top: 30px;
+  font-size: 1.3rem;
+}
+
+.letter-section {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  
+  &.visible {
+    display: block;
+    opacity: 1;
+  }
+}

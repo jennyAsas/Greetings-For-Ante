@@ -1,0 +1,26 @@
+<div class="letter-container">
+  <div class="letter-content">
+    <div class="letter-header">
+      <h2>A Special Letter Para sa Imo💜</h2>
+    </div>
+
+    <div class="letter-body">
+      <p
+        class="letter-line"
+        *ngFor="let line of displayedText; let i = index"
+        [class.visible]="currentLine > i"
+      >
+        <span class="typed-text" [innerHTML]="line"></span>
+        <span class="cursor" *ngIf="currentLine === i && line.length > 0">|</span>
+      </p>
+    </div>
+
+    <button
+      *ngIf="currentLine >= displayedText.length"
+      class="btn-enchanted continue-btn"
+      (click)="scrollToNext()"
+    >
+      See Your Wishes 💜
+    </button>
+  </div>
+</div>

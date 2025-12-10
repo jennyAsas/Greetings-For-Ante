@@ -1,0 +1,93 @@
+<div class="finale-container">
+  <div class="finale-content" [class.celebrating]="isCelebrating">
+    <h2 class="finale-title">A Final Magical Moment</h2>
+
+    <p class="finale-message">May your days be as magical as this moment ✨</p>
+
+    <button class="btn-enchanted celebrate-btn" (click)="celebrate()" *ngIf="!isCelebrating">
+      Celebrate! 🎉
+    </button>
+
+    <!-- Animated Birthday Cake -->
+    <div class="birthday-cake-container" *ngIf="isCelebrating">
+      <div class="cake-wrapper">
+        <!-- Flowers around cake -->
+        <div class="flower flower-1">🌸</div>
+        <div class="flower flower-2">🌺</div>
+        <div class="flower flower-3">🌷</div>
+        <div class="flower flower-4">🌼</div>
+        <div class="flower flower-5">🌻</div>
+        <div class="flower flower-6">🌹</div>
+
+        <!-- Cake layers (build from bottom to top) -->
+        <div class="cake">
+          <!-- Bottom layer (largest) -->
+          <div class="cake-layer cake-layer-5">
+            <div class="frosting frosting-5"></div>
+          </div>
+          <!-- Second layer -->
+          <div class="cake-layer cake-layer-4">
+            <div class="frosting frosting-4"></div>
+          </div>
+          <!-- Middle layer -->
+          <div class="cake-layer cake-layer-3">
+            <div class="frosting frosting-3"></div>
+          </div>
+          <!-- Fourth layer -->
+          <div class="cake-layer cake-layer-2">
+            <div class="frosting frosting-2"></div>
+          </div>
+          <!-- Top layer (smallest) with candles -->
+          <div class="cake-layer cake-layer-1">
+            <div class="frosting frosting-1"></div>
+            <!-- Candles -->
+            <div class="candles">
+              <div class="candle" *ngFor="let candle of [1, 2, 3, 4, 5]">
+                <div class="flame"></div>
+                <div class="wick"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sparkles around cake -->
+        <div
+          class="cake-sparkle"
+          *ngFor="let sparkle of cakeSparkles"
+          [style.left.%]="sparkle.left"
+          [style.top.%]="sparkle.top"
+          [style.animation-delay.s]="sparkle.delay"
+        >
+          ✨
+        </div>
+      </div>
+    </div>
+
+    <div class="floating-hearts" *ngIf="isCelebrating">
+      <span
+        class="heart"
+        *ngFor="let heart of hearts"
+        [style.left.%]="heart.left"
+        [style.animation-delay.s]="heart.delay"
+        >💜</span
+      >
+    </div>
+
+    <div class="confetti-container" *ngIf="isCelebrating">
+      <div
+        class="confetti"
+        *ngFor="let confetti of confettiPieces"
+        [style.left.%]="confetti.left"
+        [style.background-color]="confetti.color"
+        [style.animation-delay.s]="confetti.delay"
+      ></div>
+    </div>
+  </div>
+
+  <div class="finale-footer" *ngIf="isCelebrating">
+    <p class="final-blessing">
+      Happy Birthday, Auntie! 💜✨🎂<br />
+      May this year be your best one yet!
+    </p>
+  </div>
+</div>

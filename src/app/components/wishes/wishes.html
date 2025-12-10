@@ -1,0 +1,55 @@
+<div class="wishes-container">
+  <h2 class="wishes-title">Special Wishes for You</h2>
+
+  <div class="wishes-grid">
+    <div class="wish-card card-magical" [class.flipped]="flippedCards[0]" (click)="flipCard(0)">
+      <div class="card-inner">
+        <div class="card-front">
+          <div class="card-icon">🌟</div>
+          <h3>A Wish for You</h3>
+          <p class="card-hint">Click to reveal ✨</p>
+        </div>
+        <div class="card-back">
+          <p>
+            May your days be filled with wonder, your heart with joy, and your life with endless
+            magic.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="wish-card card-magical" [class.flipped]="flippedCards[1]" (click)="flipCard(1)">
+      <div class="card-inner">
+        <div class="card-front">
+          <div class="card-icon">💜</div>
+          <h3>Why You're Special</h3>
+          <p class="card-hint">Click to reveal ✨</p>
+        </div>
+        <div class="card-back">
+          <p>
+            Your kindness, warmth, and beautiful spirit make every moment brighter. You are truly
+            one of a kind.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="wish-card card-magical" [class.flipped]="flippedCards[2]" (click)="flipCard(2)">
+      <div class="card-inner">
+        <div class="card-front">
+          <div class="card-icon">✨</div>
+          <h3>With Love</h3>
+          <p class="card-hint">Click to reveal ✨</p>
+        </div>
+        <div class="card-back">
+          <p>
+            Thank you for being the amazing person you are. Here's to another year of beautiful
+            memories together!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-enchanted" (click)="scrollToFinale()">One More Surprise 🎉</button>
+</div>

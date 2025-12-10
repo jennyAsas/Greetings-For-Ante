@@ -1,0 +1,437 @@
+.finale-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.finale-content {
+  text-align: center;
+  z-index: 10;
+  max-width: 800px;
+  
+  &.celebrating {
+    animation: glow-pulse 2s infinite;
+  }
+}
+
+.finale-title {
+  font-family: 'Dancing Script', 'Brush Script MT', cursive;
+  font-size: 3.5rem;
+  color: var(--purple-glow);
+  text-shadow: 0 0 30px var(--purple-glow);
+  margin-bottom: 40px;
+  animation: fadeIn 1s ease;
+  
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
+}
+
+.finale-message {
+  font-size: 1.8rem;
+  color: var(--lavender);
+  margin-bottom: 50px;
+  line-height: 1.8;
+  animation: fadeIn 1.5s ease;
+  
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+  }
+}
+
+.celebrate-btn {
+  font-size: 1.5rem;
+  padding: 20px 50px;
+  animation: fadeIn 2s ease;
+}
+
+.floating-hearts {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  
+  .heart {
+    position: absolute;
+    bottom: -50px;
+    font-size: 2rem;
+    animation: float-up 4s ease-in-out infinite;
+    opacity: 0.8;
+  }
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.confetti-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  
+  .confetti {
+    position: absolute;
+    top: -10px;
+    width: 10px;
+    height: 10px;
+    animation: confetti-fall 3s ease-in-out infinite;
+  }
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.finale-footer {
+  margin-top: 60px;
+  animation: fadeIn 2s ease 1s both;
+  
+  .final-blessing {
+    font-size: 1.5rem;
+    color: var(--gold);
+    text-shadow: 0 0 20px var(--gold);
+    line-height: 2;
+    
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+// Birthday Cake Animation Styles
+.birthday-cake-container {
+  position: relative;
+  margin: 50px auto;
+  animation: fadeIn 1s ease;
+}
+
+.cake-wrapper {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  margin: 0 auto;
+  
+  @media (max-width: 768px) {
+    width: 250px;
+    height: 350px;
+  }
+}
+
+// Flowers around cake
+.flower {
+  position: absolute;
+  font-size: 2.5rem;
+  animation: flower-bloom 0.8s ease-out forwards, flower-float 3s ease-in-out infinite;
+  opacity: 0;
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+}
+
+.flower-1 {
+  top: 10%;
+  left: -15%;
+  animation-delay: 0.5s;
+}
+
+.flower-2 {
+  top: 30%;
+  right: -15%;
+  animation-delay: 0.7s;
+}
+
+.flower-3 {
+  top: 60%;
+  left: -10%;
+  animation-delay: 0.9s;
+}
+
+.flower-4 {
+  top: 70%;
+  right: -10%;
+  animation-delay: 1.1s;
+}
+
+.flower-5 {
+  top: 5%;
+  right: 5%;
+  animation-delay: 1.3s;
+}
+
+.flower-6 {
+  top: 10%;
+  left: 5%;
+  animation-delay: 1.5s;
+}
+
+@keyframes flower-bloom {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2) rotate(10deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes flower-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+}
+
+// Cake Structure
+.cake {
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse; // This makes layers stack bottom to top correctly
+  align-items: center;
+  width: 100%;
+  margin-top: 50px;
+}
+
+// Cake Layers (build from bottom to top)
+.cake-layer {
+  position: relative;
+  border-radius: 10px;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  margin-top: -5px; // Slight overlap for realistic look
+}
+
+// Bottom layer (largest - appears first)
+.cake-layer-5 {
+  width: 95%;
+  height: 75px;
+  background: linear-gradient(135deg, #6b3d99, #8b5dbf);
+  animation: layer-rise 0.6s ease-out 0.2s forwards;
+  box-shadow: 0 4px 20px var(--shadow-purple);
+  z-index: 1;
+}
+
+// Second layer from bottom
+.cake-layer-4 {
+  width: 85%;
+  height: 70px;
+  background: linear-gradient(135deg, #8b5dbf, #9d6fc4);
+  animation: layer-rise 0.6s ease-out 0.5s forwards;
+  box-shadow: 0 4px 20px var(--shadow-purple);
+  z-index: 2;
+}
+
+// Middle layer
+.cake-layer-3 {
+  width: 75%;
+  height: 65px;
+  background: linear-gradient(135deg, #b19cd9, #c5b3e6);
+  animation: layer-rise 0.6s ease-out 0.8s forwards;
+  box-shadow: 0 4px 20px var(--shadow-purple);
+  z-index: 3;
+}
+
+// Second from top
+.cake-layer-2 {
+  width: 65%;
+  height: 60px;
+  background: linear-gradient(135deg, #d8b4ff, #e6d5ff);
+  animation: layer-rise 0.6s ease-out 1.1s forwards;
+  box-shadow: 0 4px 20px var(--shadow-purple);
+  z-index: 4;
+}
+
+// Top layer (smallest - with candles)
+.cake-layer-1 {
+  width: 55%;
+  height: 55px;
+  background: linear-gradient(135deg, #e6e6fa, #f0e6ff);
+  animation: layer-rise 0.6s ease-out 1.4s forwards;
+  box-shadow: 0 4px 20px var(--shadow-purple);
+  z-index: 5;
+}
+
+@keyframes layer-rise {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scaleY(1.1);
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+// Frosting decoration
+.frosting {
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 15px;
+  border-radius: 50%;
+  opacity: 0;
+  animation: frosting-appear 0.3s ease-out forwards;
+}
+
+.frosting-5 {
+  background: linear-gradient(180deg, #ffd700, #ffed4e);
+  animation-delay: 0.8s;
+}
+
+.frosting-4 {
+  background: linear-gradient(180deg, #ffd700, #ffed4e);
+  animation-delay: 1.1s;
+}
+
+.frosting-3 {
+  background: linear-gradient(180deg, #ffd700, #ffed4e);
+  animation-delay: 1.4s;
+}
+
+.frosting-2 {
+  background: linear-gradient(180deg, #ffd700, #ffed4e);
+  animation-delay: 1.7s;
+}
+
+.frosting-1 {
+  background: linear-gradient(180deg, #ffd700, #ffed4e);
+  animation-delay: 2.0s;
+}
+
+@keyframes frosting-appear {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+// Candles
+.candles {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 15px;
+  opacity: 0;
+  animation: candles-appear 0.5s ease-out 2.3s forwards; // Delayed to appear after all layers
+}
+
+.candle {
+  position: relative;
+  width: 8px;
+  height: 35px;
+  background: linear-gradient(180deg, #fff, #e6e6fa);
+  border-radius: 3px;
+  box-shadow: 0 2px 10px rgba(255, 215, 0, 0.5);
+}
+
+.wick {
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 5px;
+  background: #333;
+}
+
+.flame {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 15px;
+  background: radial-gradient(circle, #ffd700 0%, #ff6b35 60%, transparent 100%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: flame-flicker 0.3s ease-in-out infinite alternate;
+  box-shadow: 0 0 10px #ffd700, 0 0 20px #ff6b35;
+}
+
+@keyframes candles-appear {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes flame-flicker {
+  0% {
+    transform: translateX(-50%) scaleY(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-50%) scaleY(1.1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(-50%) scaleY(0.95);
+    opacity: 1;
+  }
+}
+
+// Sparkles around cake
+.cake-sparkle {
+  position: absolute;
+  font-size: 1.5rem;
+  color: var(--gold);
+  animation: cake-sparkle-animation 2s ease-in-out infinite;
+  text-shadow: 0 0 10px var(--gold);
+}
+
+@keyframes cake-sparkle-animation {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(180deg);
+  }
+}

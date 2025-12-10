@@ -1,0 +1,12 @@
+<div class="sparkles-container">
+  <div
+    class="sparkle"
+    *ngFor="let sparkle of sparkles"
+    [style.left.%]="sparkle.left"
+    [style.top.%]="sparkle.top"
+    [style.animation-delay.s]="sparkle.delay"
+    [style.font-size.px]="sparkle.size"
+  >
+    ✨
+  </div>
+</div>

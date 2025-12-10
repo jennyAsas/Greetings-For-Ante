@@ -1,1 +1,102 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Purple Enchantment Theme Variables
+:root {
+  --purple-dark: #4b0082;
+  --purple-medium: #8b5dbf;
+  --purple-light: #b19cd9;
+  --purple-glow: #d8b4ff;
+  --lavender: #e6e6fa;
+  --gold: #ffd700;
+  --white-soft: #f9f9ff;
+  --shadow-purple: rgba(139, 93, 191, 0.5);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple-medium) 100%);
+  color: var(--white-soft);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  font-family: 'Dancing Script', 'Brush Script MT', cursive;
+}
+
+// Reusable glow effect
+@mixin glow-effect($color: var(--purple-glow)) {
+  box-shadow: 0 0 20px $color, 0 0 40px $color;
+}
+
+// Floating animation
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 10px var(--purple-glow); }
+  50% { box-shadow: 0 0 30px var(--purple-glow), 0 0 50px var(--gold); }
+}
+
+// Button styles
+.btn-enchanted {
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, var(--purple-medium), var(--purple-light));
+  color: white;
+  border: 2px solid var(--gold);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  letter-spacing: 1px;
+  
+  &:hover {
+    @include glow-effect();
+    transform: translateY(-3px) scale(1.05);
+    background: linear-gradient(135deg, var(--purple-light), var(--purple-glow));
+  }
+  
+  &:active {
+    transform: translateY(0) scale(1);
+  }
+}
+
+// Card styles
+.card-magical {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--purple-glow);
+  border-radius: 20px;
+  padding: 30px;
+  transition: all 0.4s ease;
+  
+  &:hover {
+    transform: translateY(-10px);
+    @include glow-effect();
+  }
+}
+
+// Smooth scrolling
+html {
+  scroll-behavior: smooth;
+}
+
