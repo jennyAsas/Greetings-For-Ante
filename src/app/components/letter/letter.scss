@@ -77,8 +77,14 @@
     z-index: 2;
     position: relative;
 
-    @media (max-width: 375px) {
+    @media (max-width: 768px) {
+      animation: titleGlowPulse 1.4s ease-in-out infinite;
       font-size: 2rem;
+      letter-spacing: 0.01em;
+    }
+
+    @media (max-width: 375px) {
+      font-size: 1.8rem;
       letter-spacing: 0.01em;
     }
   }
@@ -93,9 +99,14 @@
     border-radius: 50%;
     background: radial-gradient(circle at 30% 30%, rgba(186, 85, 211, 0.3), transparent 70%);
     filter: blur(40px);
-    animation: glowPulseBackground 2s ease-in-out infinite;
+    animation: none;
     z-index: 0;
     pointer-events: none;
+    
+    @media (max-width: 768px) {
+      filter: blur(20px);
+      animation: none;
+    }
   }
 }
 
@@ -143,6 +154,7 @@
       opacity: 0.4;
       transition: all 0.3s ease;
       text-shadow: 0 0 12px rgba(186, 85, 211, 0.4);
+      will-change: opacity, transform;
       
       &.active {
         opacity: 1;
@@ -150,7 +162,7 @@
         text-shadow: 
           0 0 20px rgba(186, 85, 211, 0.8),
           0 0 35px rgba(147, 112, 219, 0.6);
-        animation: dotGlow 0.4s ease;
+        animation: dotGlow 0.3s ease;
         transform: scale(1.15);
       }
     }
@@ -233,13 +245,17 @@
   display: inline-block;
   opacity: 0;
   transform: translateY(6px);
-  filter: blur(2.5px);
-  animation: enchanted-appear 0.3s cubic-bezier(0.34, 0.46, 0.45, 0.94) forwards;
-  animation-delay: calc(var(--i) * 35ms);
+  filter: blur(1px);
+  animation: enchanted-appear 0.25s cubic-bezier(0.34, 0.46, 0.45, 0.94) forwards;
+  animation-delay: calc(var(--i) * 20ms);
   text-shadow:
     0 0 10px rgba(186, 85, 211, 0.5),
-    0 0 18px rgba(147, 112, 219, 0.35),
-    0 0 28px rgba(138, 43, 226, 0.2);
+    0 0 18px rgba(147, 112, 219, 0.35);
+  
+  @media (max-width: 768px) {
+    filter: blur(0.5px);
+    animation-delay: calc(var(--i) * 15ms);
+  }
 }
 
 .letter-break {
@@ -319,6 +335,15 @@
   transition: all 1.6s cubic-bezier(0.34, 0.05, 0.15, 1);
   display: flex;
   flex-direction: column;
+  will-change: transform, opacity;
+  
+  @media (max-width: 768px) {
+    backdrop-filter: blur(10px);
+    box-shadow:
+      0 0 40px rgba(147, 112, 219, 0.25),
+      0 0 20px rgba(186, 85, 211, 0.15),
+      inset 0 0 30px rgba(139, 93, 191, 0.1);
+  }
   
   @media (max-width: 375px) {
     padding: 1.75rem 1.25rem;
@@ -496,7 +521,7 @@
   0% {
     opacity: 0;
     transform: scale(0.95) translateY(20px);
-    filter: blur(4px);
+    filter: blur(2px);
   }
   60% {
     opacity: 1;

@@ -180,6 +180,11 @@
       0 0 60px rgba(186, 85, 211, 0.6),
       inset 0 0 20px rgba(255, 255, 255, 0.5);
     animation: orbPulse 2s ease-in-out infinite;
+    will-change: transform;
+    
+    @media (max-width: 768px) {
+      animation: orbPulseMobile 1.5s ease-in-out infinite;
+    }
   }
   
   .orb-ring {
@@ -187,6 +192,7 @@
     border-radius: 50%;
     border: 2px solid rgba(255, 215, 0, 0.4);
     animation: ringExpand 3s ease-in-out infinite;
+    will-change: transform, opacity;
     
     &.ring-1 {
       width: 70px;
@@ -198,6 +204,14 @@
       width: 90px;
       height: 90px;
       animation-delay: 1.5s;
+    }
+    
+    @media (max-width: 768px) {
+      animation: ringExpand 2s ease-in-out infinite;
+      
+      &.ring-2 {
+        animation-delay: 1s;
+      }
     }
   }
   
@@ -253,6 +267,11 @@
     box-shadow: 
       0 0 20px rgba(186, 85, 211, 0.8),
       0 0 40px rgba(147, 112, 219, 0.6);
+    will-change: transform;
+    
+    @media (max-width: 768px) {
+      animation: heartBeat 1.2s ease-in-out infinite;
+    }
     
     &::before, &::after {
       content: '';
@@ -332,6 +351,7 @@
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
     animation: starTwinkle 2s ease-in-out infinite;
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+    will-change: opacity, transform;
     
     &.star-1 {
       top: 20%;
@@ -357,6 +377,10 @@
       right: 30%;
       animation-delay: 1.5s;
       transform: scale(1.2);
+    }
+    
+    @media (max-width: 768px) {
+      animation: starTwinkle 1.5s ease-in-out infinite;
     }
   }
   
@@ -592,4 +616,33 @@
     transform: rotate(360deg);
   }
 }
+
+// Mobile-optimized animations
+@keyframes orbPulseMobile {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@media (max-width: 768px) {
+  .card-inner {
+    transition: transform 0.6s cubic-bezier(0.34, 0.46, 0.45, 0.94);
+  }
+  
+  .wish-card {
+    animation: enchantedCardAppear 0.6s cubic-bezier(0.34, 0.46, 0.45, 0.94) forwards;
+    
+    &:nth-child(1) { animation-delay: 0.1s; }
+    &:nth-child(2) { animation-delay: 0.2s; }
+    &:nth-child(3) { animation-delay: 0.3s; }
+  }
+  
+  .card-front {
+    backdrop-filter: blur(10px);
+  }
+}
+
 
