@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .wishes-title {
@@ -13,8 +14,11 @@
   color: var(--purple-glow);
   text-align: center;
   margin-bottom: 60px;
-  text-shadow: 0 0 20px var(--purple-glow);
-  animation: fadeIn 1s ease;
+  text-shadow: 
+    0 0 30px rgba(186, 85, 211, 0.8),
+    0 0 60px rgba(147, 112, 219, 0.6),
+    0 4px 20px rgba(0, 0, 0, 0.3);
+  animation: titleEnchantedGlow 3s ease-in-out infinite;
   
   @media (max-width: 768px) {
     font-size: 2rem;
@@ -40,10 +44,24 @@
   height: 350px;
   perspective: 1000px;
   cursor: pointer;
-  animation: fadeIn 1s ease;
+  animation: enchantedCardAppear 0.8s cubic-bezier(0.34, 0.46, 0.45, 0.94) forwards;
+  opacity: 0;
+  
+  &:nth-child(1) { animation-delay: 0.2s; }
+  &:nth-child(2) { animation-delay: 0.4s; }
+  &:nth-child(3) { animation-delay: 0.6s; }
   
   @media (max-width: 768px) {
     height: 300px;
+  }
+  
+  &:hover {
+    .card-front {
+      box-shadow: 
+        0 0 50px rgba(186, 85, 211, 0.6),
+        0 0 100px rgba(147, 112, 219, 0.4),
+        inset 0 0 30px rgba(255, 255, 255, 0.1);
+    }
   }
 }
 
@@ -52,7 +70,7 @@
   width: 100%;
   height: 100%;
   text-align: center;
-  transition: transform 0.8s;
+  transition: transform 1s cubic-bezier(0.34, 0.46, 0.45, 0.94);
   transform-style: preserve-3d;
   
   .wish-card.flipped & {
@@ -72,39 +90,506 @@
   align-items: center;
   padding: 30px;
   border-radius: 20px;
+  transition: all 0.4s ease;
 }
 
 .card-front {
-  background: rgba(255, 255, 255, 0.08);
-  border: 2px solid var(--purple-light);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(16px);
+  border: 2px solid rgba(186, 85, 211, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(147, 112, 219, 0.2),
+    inset 0 0 30px rgba(255, 255, 255, 0.05);
   
   .card-icon {
-    font-size: 4rem;
-    margin-bottom: 20px;
-    animation: float 2s ease-in-out infinite;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 30px;
+    position: relative;
+    animation: enchantedFloat 3s ease-in-out infinite;
   }
   
   h3 {
     font-size: 1.8rem;
-    color: var(--purple-glow);
+    font-family: 'Playfair Display', Georgia, serif;
+    color: #f0e7ff;
     margin-bottom: 15px;
+    text-shadow: 
+      0 0 20px rgba(186, 85, 211, 0.6),
+      0 0 40px rgba(147, 112, 219, 0.4);
   }
   
   .card-hint {
-    color: var(--lavender);
+    color: #d4c5f9;
     font-size: 0.9rem;
     opacity: 0.8;
+    
+    .sparkle-hint {
+      display: inline-block;
+      animation: sparkleRotate 2s linear infinite;
+    }
   }
 }
 
 .card-back {
-  background: linear-gradient(135deg, var(--purple-dark), var(--purple-medium));
-  border: 2px solid var(--gold);
+  background: linear-gradient(135deg, 
+    rgba(76, 31, 122, 0.95), 
+    rgba(106, 46, 160, 0.95));
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 215, 0, 0.5);
   transform: rotateY(180deg);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba(255, 215, 0, 0.3),
+    inset 0 0 40px rgba(255, 255, 255, 0.1);
   
   p {
     font-size: 1.2rem;
     line-height: 1.8;
-    color: var(--white-soft);
+    color: #f0e7ff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   }
 }
+
+/* ========================================
+   ENCHANTED ICON EFFECTS
+   ======================================== */
+
+// Magic Orb Icon (Card 1)
+.icon-wish {
+  .magic-orb {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .orb-core {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, 
+      rgba(255, 215, 0, 1),
+      rgba(255, 165, 0, 0.8),
+      rgba(186, 85, 211, 0.6));
+    box-shadow: 
+      0 0 30px rgba(255, 215, 0, 0.8),
+      0 0 60px rgba(186, 85, 211, 0.6),
+      inset 0 0 20px rgba(255, 255, 255, 0.5);
+    animation: orbPulse 2s ease-in-out infinite;
+  }
+  
+  .orb-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 215, 0, 0.4);
+    animation: ringExpand 3s ease-in-out infinite;
+    
+    &.ring-1 {
+      width: 70px;
+      height: 70px;
+      animation-delay: 0s;
+    }
+    
+    &.ring-2 {
+      width: 90px;
+      height: 90px;
+      animation-delay: 1.5s;
+    }
+  }
+  
+  .orb-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255, 215, 0, 0.8);
+      box-shadow: 0 0 10px rgba(255, 215, 0, 1);
+    }
+    
+    &::before {
+      top: 10%;
+      left: 20%;
+      animation: particleFloat1 4s ease-in-out infinite;
+    }
+    
+    &::after {
+      bottom: 15%;
+      right: 25%;
+      animation: particleFloat2 3.5s ease-in-out infinite;
+    }
+  }
+}
+
+// Enchanted Heart Icon (Card 2)
+.icon-heart {
+  .enchanted-heart {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .heart-shape {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, 
+      rgba(186, 85, 211, 1),
+      rgba(147, 112, 219, 0.9));
+    position: relative;
+    transform: rotate(-45deg);
+    animation: heartBeat 1.5s ease-in-out infinite;
+    box-shadow: 
+      0 0 20px rgba(186, 85, 211, 0.8),
+      0 0 40px rgba(147, 112, 219, 0.6);
+    
+    &::before, &::after {
+      content: '';
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, 
+        rgba(186, 85, 211, 1),
+        rgba(147, 112, 219, 0.9));
+      border-radius: 50%;
+      position: absolute;
+    }
+    
+    &::before {
+      top: -25px;
+      left: 0;
+    }
+    
+    &::after {
+      left: 25px;
+      top: 0;
+    }
+  }
+  
+  .heart-glow {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, 
+      rgba(186, 85, 211, 0.4),
+      transparent 70%);
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+  
+  .heart-sparkles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    
+    &::before, &::after {
+      content: '✨';
+      position: absolute;
+      font-size: 12px;
+      opacity: 0;
+      animation: sparkleAppear 3s ease-in-out infinite;
+    }
+    
+    &::before {
+      top: 5%;
+      right: 15%;
+      animation-delay: 0s;
+    }
+    
+    &::after {
+      bottom: 10%;
+      left: 10%;
+      animation-delay: 1.5s;
+    }
+  }
+}
+
+// Magic Constellation Icon (Card 3)
+.icon-sparkle {
+  .magic-constellation {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .star {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(45deg, 
+      rgba(255, 215, 0, 1),
+      rgba(255, 255, 255, 0.9));
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    animation: starTwinkle 2s ease-in-out infinite;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+    
+    &.star-1 {
+      top: 20%;
+      left: 30%;
+      animation-delay: 0s;
+      transform: scale(1.5);
+    }
+    
+    &.star-2 {
+      top: 35%;
+      right: 25%;
+      animation-delay: 0.5s;
+    }
+    
+    &.star-3 {
+      bottom: 30%;
+      left: 25%;
+      animation-delay: 1s;
+    }
+    
+    &.star-4 {
+      bottom: 20%;
+      right: 30%;
+      animation-delay: 1.5s;
+      transform: scale(1.2);
+    }
+  }
+  
+  .constellation-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, 
+      rgba(255, 215, 0, 0.2),
+      transparent 60%);
+    animation: constellationPulse 3s ease-in-out infinite;
+  }
+}
+
+// Button Magic Icon
+.btn-enchanted {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  
+  .btn-magic-icon {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    display: inline-block;
+    
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, 
+        rgba(255, 215, 0, 0.8),
+        rgba(255, 165, 0, 0.6));
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      animation: buttonIconSpin 3s linear infinite;
+    }
+    
+    &::after {
+      transform: scale(0.6);
+      opacity: 0.6;
+      animation-direction: reverse;
+    }
+  }
+}
+
+/* ========================================
+   ENCHANTED ANIMATIONS
+   ======================================== */
+
+@keyframes titleEnchantedGlow {
+  0%, 100% {
+    text-shadow: 
+      0 0 30px rgba(186, 85, 211, 0.8),
+      0 0 60px rgba(147, 112, 219, 0.6),
+      0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    text-shadow: 
+      0 0 50px rgba(186, 85, 211, 1),
+      0 0 100px rgba(147, 112, 219, 0.8),
+      0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@keyframes enchantedCardAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes enchantedFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-8px) rotate(-2deg);
+  }
+}
+
+@keyframes sparkleRotate {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes orbPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 
+      0 0 30px rgba(255, 215, 0, 0.8),
+      0 0 60px rgba(186, 85, 211, 0.6),
+      inset 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 
+      0 0 40px rgba(255, 215, 0, 1),
+      0 0 80px rgba(186, 85, 211, 0.8),
+      inset 0 0 30px rgba(255, 255, 255, 0.7);
+  }
+}
+
+@keyframes ringExpand {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+@keyframes particleFloat1 {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-20px, -30px);
+    opacity: 1;
+  }
+  90% {
+    opacity: 0;
+  }
+}
+
+@keyframes particleFloat2 {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate(25px, -25px);
+    opacity: 1;
+  }
+  90% {
+    opacity: 0;
+  }
+}
+
+@keyframes heartBeat {
+  0%, 100% {
+    transform: rotate(-45deg) scale(1);
+  }
+  10%, 30% {
+    transform: rotate(-45deg) scale(1.1);
+  }
+  20%, 40% {
+    transform: rotate(-45deg) scale(1);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.9;
+  }
+}
+
+@keyframes sparkleAppear {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.5) translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) translateY(-10px);
+  }
+}
+
+@keyframes starTwinkle {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3) rotate(45deg);
+  }
+}
+
+@keyframes constellationPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes buttonIconSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+

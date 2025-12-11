@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,7 +8,19 @@ import { CommonModule } from '@angular/common';
   styleUrl: './letter.scss',
 })
 export class Letter implements OnInit {
+  // Intro sequence states
+  introState: 'idle' | 'title' | 'loading' | 'complete' = 'idle';
+  showTitleScreen = false;
+  showLoadingScreen = false;
+  showMainCard = false;
+  loadingDot = 0;
+
   isCardOpen = false;
+  isTypingActive = false;
+
+  letterCharacters: { char: string; isBreak: boolean; index: number }[] = [];
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   letterContent = `Dear Auntie,
 
@@ -32,14 +44,107 @@ With all my love,
 —Your parang timang, Danghag, and Loving Tinuring na parang Anak 💜`;
 
   ngOnInit() {
-    // Automatically open the card after a short delay
+    this.letterCharacters = this.buildCharacters(this.letterContent);
+    // Intro sequence will be triggered by cover component
+  }
+
+  // Public method to start the intro sequence (called by cover component)
+  public beginIntroSequence() {
+    this.startIntroSequence();
+  }
+
+  private startIntroSequence() {
+    // ============================================
+    // STEP 1: Title Screen - 'A Special Letter Para Sa Imo 💜'
+    // Shows immediately, stays for 3 seconds, fades out
+    // ============================================
+    this.introState = 'title';
+    this.showTitleScreen = true;
+    this.showLoadingScreen = false;
+    this.showMainCard = false;
+    this.cdr.detectChanges();
+
+    // After 3.8 seconds (3s visible + 0.8s fade): Hide title and show loading
     setTimeout(() => {
-      this.isCardOpen = true;
-    }, 500);
+      this.showTitleScreen = false;
+      this.cdr.detectChanges();
+
+      // ============================================
+      // STEP 2: Opening Screen - 'Opening the Letter…'
+      // Fades in after title fades out, stays for 2 seconds
+      // ============================================
+      setTimeout(() => {
+        this.introState = 'loading';
+        this.showLoadingScreen = true;
+        this.cdr.detectChanges();
+        this.startLoadingAnimation();
+
+        // After 2.6 seconds (2s visible + 0.6s fade): Hide loading and show card
+        setTimeout(() => {
+          this.showLoadingScreen = false;
+          this.cdr.detectChanges();
+
+          // ============================================
+          // STEP 3: Main Card Reveal
+          // Fades in with scale animation after loading fades out
+          // ============================================
+          setTimeout(() => {
+            this.introState = 'complete';
+            this.showMainCard = true;
+            this.cdr.detectChanges();
+
+            // ============================================
+            // STEP 4: Open Card & Start Typewriter
+            // Card opens automatically, then typewriter effect plays
+            // ============================================
+            setTimeout(() => {
+              this.isCardOpen = true;
+              this.cdr.detectChanges();
+
+              // Start typewriter after card opening animation
+              setTimeout(() => {
+                this.isTypingActive = true;
+                this.cdr.detectChanges();
+              }, 800);
+            }, 600); // Wait for card reveal animation
+          }, 100); // Small delay after loading screen fades
+        }, 2600); // 2s visible + 0.6s fade out
+      }, 100); // Small delay after title fades
+    }, 3800); // 3s visible + 0.8s fade out
+  }
+  private startLoadingAnimation() {
+    let dotIndex = 0;
+    const loadingInterval = setInterval(() => {
+      this.loadingDot = dotIndex % 3;
+      dotIndex++;
+      this.cdr.detectChanges();
+    }, 400); // Faster animation for 2-second duration
+
+    // Stop the interval after 2 seconds
+    setTimeout(() => {
+      clearInterval(loadingInterval);
+      this.loadingDot = 0;
+      this.cdr.detectChanges();
+    }, 2000);
   }
 
   scrollToNext() {
     const wishesSection = document.querySelector('.wishes-container');
     wishesSection?.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  private buildCharacters(text: string) {
+    const chars: { char: string; isBreak: boolean; index: number }[] = [];
+
+    Array.from(text).forEach((char, index) => {
+      const isBreak = char === '\n';
+      chars.push({
+        char: isBreak ? '' : char,
+        isBreak,
+        index,
+      });
+    });
+
+    return chars;
   }
 }

@@ -1,18 +1,25 @@
 <div class="wishes-container">
-  <h2 class="wishes-title">Special Wishes for You</h2>
+  <h2 class="wishes-title">Para Sa Imo, Gikan Sa Ako!</h2>
 
   <div class="wishes-grid">
     <div class="wish-card card-magical" [class.flipped]="flippedCards[0]" (click)="flipCard(0)">
       <div class="card-inner">
         <div class="card-front">
-          <div class="card-icon">🌟</div>
+          <div class="card-icon icon-wish">
+            <div class="magic-orb">
+              <div class="orb-core"></div>
+              <div class="orb-ring ring-1"></div>
+              <div class="orb-ring ring-2"></div>
+              <div class="orb-particles"></div>
+            </div>
+          </div>
           <h3>A Wish for You</h3>
-          <p class="card-hint">Click to reveal ✨</p>
+          <p class="card-hint">Touch me to reveal <span class="sparkle-hint">✨</span></p>
         </div>
         <div class="card-back">
           <p>
             May your days be filled with wonder, your heart with joy, and your life with endless
-            magic.
+            magic Ante💜.
           </p>
         </div>
       </div>
@@ -21,13 +28,19 @@
     <div class="wish-card card-magical" [class.flipped]="flippedCards[1]" (click)="flipCard(1)">
       <div class="card-inner">
         <div class="card-front">
-          <div class="card-icon">💜</div>
+          <div class="card-icon icon-heart">
+            <div class="enchanted-heart">
+              <div class="heart-shape"></div>
+              <div class="heart-glow"></div>
+              <div class="heart-sparkles"></div>
+            </div>
+          </div>
           <h3>Why You're Special</h3>
-          <p class="card-hint">Click to reveal ✨</p>
+          <p class="card-hint">Touch me to reveal<span class="sparkle-hint">✨</span></p>
         </div>
         <div class="card-back">
           <p>
-            Your kindness, warmth, and beautiful spirit make every moment brighter. You are truly
+            Your kindness, warmth, and beautiful spirit make every moment brighter Ante💜. You are truly
             one of a kind.
           </p>
         </div>
@@ -37,13 +50,21 @@
     <div class="wish-card card-magical" [class.flipped]="flippedCards[2]" (click)="flipCard(2)">
       <div class="card-inner">
         <div class="card-front">
-          <div class="card-icon">✨</div>
+          <div class="card-icon icon-sparkle">
+            <div class="magic-constellation">
+              <div class="star star-1"></div>
+              <div class="star star-2"></div>
+              <div class="star star-3"></div>
+              <div class="star star-4"></div>
+              <div class="constellation-glow"></div>
+            </div>
+          </div>
           <h3>With Love</h3>
-          <p class="card-hint">Click to reveal ✨</p>
+          <p class="card-hint">Touch me to reveal<span class="sparkle-hint">✨</span></p>
         </div>
         <div class="card-back">
           <p>
-            Thank you for being the amazing person you are. Here's to another year of beautiful
+            Thank you for being the amazing person na naila nako sa akong tibook kinabuhi. Here's to another year of beautiful
             memories together!
           </p>
         </div>
@@ -51,5 +72,8 @@
     </div>
   </div>
 
-  <button class="btn-enchanted" (click)="scrollToFinale()">One More Surprise 🎉</button>
+  <button class="btn-enchanted" (click)="scrollToFinale()">
+    <span class="btn-text">Touch Me Please!</span>
+    <span class="btn-magic-icon"></span>
+  </button>
 </div>

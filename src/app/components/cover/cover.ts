@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Sparkles } from '../sparkles/sparkles';
 import { Letter } from '../letter/letter';
@@ -12,6 +12,7 @@ import { Finale } from '../finale/finale';
   styleUrl: './cover.scss',
 })
 export class Cover implements OnDestroy {
+  @ViewChild(Letter) letterComponent!: Letter;
   private audio: HTMLAudioElement | null = null;
 
   openLetter() {
@@ -35,6 +36,13 @@ export class Cover implements OnDestroy {
     if (letterSection) {
       letterSection.classList.add('visible');
     }
+
+    // Start the letter intro sequence
+    setTimeout(() => {
+      if (this.letterComponent) {
+        this.letterComponent.beginIntroSequence();
+      }
+    }, 200); // Small delay to ensure letter section is visible
   }
 
   playBackgroundMusic() {
