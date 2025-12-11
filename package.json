@@ -9,7 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:purple-birthday-letter": "node dist/purple-birthday-letter/server/server.mjs",
-    "deploy": "ng build --configuration production --base-href /purple-birthday-letter/ && npx angular-cli-ghpages --dir=dist/purple-birthday-letter/browser"
+    "deploy": "ng build --configuration production --base-href /Greetings-For-Ante/ && npx angular-cli-ghpages --dir=dist/purple-birthday-letter/browser"
   },
   "prettier": {
     "printWidth": 100,
